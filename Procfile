@@ -1,1 +1,1 @@
-web: gunicorn traffic.wsgi
+web: gunicorn traffice.wsgi:application --log-file -
