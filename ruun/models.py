@@ -10,6 +10,7 @@ class Driver(models.Model):
    sex = models.CharField(max_length=6)
    nationality = models.CharField(max_length=30, default="")
    nationalnum = models.CharField(max_length=30, default="")
+   carnum = models.CharField(max_length=30, default="",verbose_name="The Number of Cars Owned By The Driver")
 
 
 class Car(models.Model):
@@ -32,6 +33,7 @@ class Car(models.Model):
    maxspeed= models.CharField(max_length=30, default="")
    enginedisplacement= models.CharField(max_length=30, default="")
    driver = models.ForeignKey(Driver,on_delete=models.CASCADE)
+   violnum = models.CharField(max_length=30, default="")
    """def __str__(self):
        return "{}  ({})".format(self.brand,self.plate)"""
 
