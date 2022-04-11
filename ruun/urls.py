@@ -10,11 +10,11 @@ from django.conf import settings
 
 router = routers.DefaultRouter()
 router.register('carrs', CarViewSet)
-router.register(r'lic',LicenseViewSet)
+"""router.register(r'lic',LicenseViewSet)
 router.register(r'ins',InsuranceViewSet)
 router.register(r'vio',ViolationseViewSet)
 router.register(r'dri',DriverViewSet)
-router.register(r'bal',BalanceViewSet)
+router.register(r'bal',BalanceViewSet)"""
 
 
 urlpatterns = [

@@ -9,7 +9,7 @@ class CarViewSet(viewsets.ModelViewSet):
 
 
 
-class LicenseViewSet(viewsets.ModelViewSet):
+"""class LicenseViewSet(viewsets.ModelViewSet):
     queryset = License.objects.all()
     serializer_class = LicenseSerializer
 
@@ -31,4 +31,4 @@ class DriverViewSet(viewsets.ModelViewSet):
 
 class BalanceViewSet(viewsets.ModelViewSet):
     queryset = Balance.objects.all()
-    serializer_class = BalanceSerializer
+    serializer_class = BalanceSerializer """
