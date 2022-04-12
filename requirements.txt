@@ -16,3 +16,5 @@ sqlparse==0.4.2
 tzdata==2021.5
 virtualenv==20.10.0
 whitenoise==6.0.0
+dj-database-url
+psycopg2
