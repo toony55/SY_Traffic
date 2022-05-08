@@ -9,12 +9,11 @@ from django.conf import settings
 
 
 router = routers.DefaultRouter()
-router.register('carrs', CarViewSet)
+router.register(r'ca',CarViewSet)
+router.register(r'inc',InsuranceViewSet)
 router.register(r'lic',LicenseViewSet)
-router.register(r'ins',InsuranceViewSet)
 router.register(r'vio',ViolationseViewSet)
 router.register(r'dri',DriverViewSet)
-router.register(r'bal',BalanceViewSet)
 
 
 urlpatterns = [
@@ -23,3 +22,4 @@ urlpatterns = [
     re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 ]
+

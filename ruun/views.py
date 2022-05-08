@@ -1,7 +1,11 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .serializers import CarSerializer,DriverSerializer,LicenseSerializer,InsuranceSerializer,ViolationsSerializer,BalanceSerializer
-from .models import Driver,Car,License,Insurance,Violations,Balance
+from django.http import HttpResponse,JsonResponse
+from .serializers import CarSerializer,DriverSerializer,LicenseSerializer,InsuranceSerializer,ViolationsSerializer
+from .models import Driver,Car,License,Insurance,Violations
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
 
 class CarViewSet(viewsets.ModelViewSet):
     queryset = Car.objects.all()
@@ -27,8 +31,25 @@ class ViolationseViewSet(viewsets.ModelViewSet):
 class DriverViewSet(viewsets.ModelViewSet):
     queryset = Driver.objects.all()
     serializer_class = DriverSerializer
+    http_method_names = ['get','post','retrieve','put','patch']
 
 
-class BalanceViewSet(viewsets.ModelViewSet):
-    queryset = Balance.objects.all()
-    serializer_class = BalanceSerializer
+
+"""
+@api_view(['GET','POST'])
+def lic_list(request):
+    if request.method == 'GET':
+       liist=Balance.objects.all()
+       serializer = BalanceSerializer(liist,many=True)
+       return Response(serializer.data)
+
+    elif request.method == 'POST':
+         serializer = BalanceSerializer(data=request.data,read_only=True)
+         if serializer.is_valid():
+             serializer.save()
+             return Response(serializer.data,status=status.HTTP_201_CREATED)
+         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+         """
+         
+
+

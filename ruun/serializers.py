@@ -1,15 +1,14 @@
 
+
+from .models import Driver,Car,License,Insurance,Violations
 from rest_framework import serializers
-
-from .models import Driver,Car,License,Insurance,Violations,Balance
-
 
 
 class DriverSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
      model = Driver
-     fields = ['name', 'code', 'bd','sex','nationality','nationalnum']
+     fields = ['name', 'code','baalance', 'bd','sex','nationality','nationalnum','carnum','photo']
 
 
 
@@ -20,7 +19,7 @@ class CarSerializer(serializers.ModelSerializer):
     class Meta:
        model = Car
        fields = ['plate', 'brand', 'modeel', 'weight','cs','cd','fueltype','fueltankcapacity','pyy','rd','en','cn',
-                'color','transmissiontype','nog','maxspeed','enginedisplacement','driver']
+                'color','transmissiontype','nog','maxspeed','enginedisplacement','violnum','driver']
 
 
 
@@ -49,10 +48,3 @@ class ViolationsSerializer(serializers.HyperlinkedModelSerializer):
        model=Violations
        fields=['typeofv','datev','fee','vionum','plate']
 
-
-class BalanceSerializer(serializers.HyperlinkedModelSerializer):
-
-    code=DriverSerializer()
-    class Meta:
-       model=Balance
-       fields=['baalance','code']

@@ -5,12 +5,14 @@ from django.db import models
 class Driver(models.Model):
    """The drivers Info."""
    name = models.CharField(max_length=50,help_text="The name of the driver.")
-   code = models.CharField(max_length=50,help_text="The Secret Code.",unique=True)
+   code = models.CharField(max_length=50,help_text="The Secret Code.")
+   baalance = models.DecimalField(max_digits=10,decimal_places=2, default=0.0)
    bd = models.DateField(verbose_name="birth date")
    sex = models.CharField(max_length=6)
    nationality = models.CharField(max_length=30, default="")
    nationalnum = models.CharField(max_length=30, default="")
    carnum = models.CharField(max_length=30, default="",verbose_name="The Number of Cars Owned By The Driver")
+   photo=models.URLField(max_length = 200,default="")
 
 
 class Car(models.Model):
@@ -34,8 +36,7 @@ class Car(models.Model):
    enginedisplacement= models.CharField(max_length=30, default="")
    driver = models.ForeignKey(Driver,on_delete=models.CASCADE)
    violnum = models.CharField(max_length=30, default="")
-   """def __str__(self):
-       return "{}  ({})".format(self.brand,self.plate)"""
+
 
 
 
@@ -75,8 +76,3 @@ class Insurance(models.Model):
    plate = models.ForeignKey(Car,on_delete=models.CASCADE)
 
 
-
-class Balance(models.Model):
-    """The Account's Balance."""
-    baalance = models.DecimalField(max_digits=10,decimal_places=2, default=0.0)
-    code = models.ForeignKey(Driver,on_delete=models.CASCADE)
