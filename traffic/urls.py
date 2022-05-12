@@ -7,6 +7,7 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("ruun.urls")),
+     path('loog/', include("ruun.loog.urls")),
 
 
 ]

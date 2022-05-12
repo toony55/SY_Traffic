@@ -6,6 +6,14 @@ from .models import Driver,Car,License,Insurance,Violations
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from .models import Driver,Car,License,Insurance,Violations
+
+
+
+from rest_framework.authentication import  TokenAuthentication
+from rest_framework.authtoken.views import  ObtainAuthToken
+from rest_framework.authtoken.serializers import AuthTokenSerializer
+from rest_framework.settings import  api_settings
 
 class CarViewSet(viewsets.ModelViewSet):
     queryset = Car.objects.all()
@@ -33,23 +41,7 @@ class DriverViewSet(viewsets.ModelViewSet):
     serializer_class = DriverSerializer
     http_method_names = ['get','post','retrieve','put','patch']
 
+"""class UserLoginApiView(ObtainAuthToken):
+    renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES"""
 
-
-"""
-@api_view(['GET','POST'])
-def lic_list(request):
-    if request.method == 'GET':
-       liist=Balance.objects.all()
-       serializer = BalanceSerializer(liist,many=True)
-       return Response(serializer.data)
-
-    elif request.method == 'POST':
-         serializer = BalanceSerializer(data=request.data,read_only=True)
-         if serializer.is_valid():
-             serializer.save()
-             return Response(serializer.data,status=status.HTTP_201_CREATED)
-         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-         """
          
-
-

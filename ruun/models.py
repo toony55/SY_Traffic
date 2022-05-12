@@ -1,6 +1,6 @@
 from django.contrib import auth
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class Driver(models.Model):
    """The drivers Info."""
@@ -13,7 +13,7 @@ class Driver(models.Model):
    nationalnum = models.CharField(max_length=30, default="")
    carnum = models.CharField(max_length=30, default="",verbose_name="The Number of Cars Owned By The Driver")
    photo=models.URLField(max_length = 200,default="")
-
+   user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 
 class Car(models.Model):
    """The Cars Info."""
@@ -36,6 +36,7 @@ class Car(models.Model):
    enginedisplacement= models.CharField(max_length=30, default="")
    driver = models.ForeignKey(Driver,on_delete=models.CASCADE)
    violnum = models.CharField(max_length=30, default="")
+   user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 
 
 
@@ -53,6 +54,7 @@ class License(models.Model):
    city= models.CharField(max_length=30, default="")
    typeoflicense= models.CharField(max_length=30, default="")
    driver = models.ForeignKey(Driver,on_delete=models.CASCADE)
+   user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 
 
 
@@ -63,6 +65,7 @@ class Violations(models.Model):
    fee = models.DecimalField(max_digits=10,decimal_places=2, default="")
    plate = models.ForeignKey(Car,on_delete=models.CASCADE)
    vionum = models.CharField(max_length=30, default="")
+   user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 
 
 
@@ -74,5 +77,6 @@ class Insurance(models.Model):
    dateofexpired = models.DateField(verbose_name="Experation date", default="")
    renewalfee = models.DecimalField(max_digits=10,decimal_places=2, default=0.0)
    plate = models.ForeignKey(Car,on_delete=models.CASCADE)
+   user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 
 

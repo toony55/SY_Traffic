@@ -4,6 +4,7 @@ from rest_framework import routers
 from .views import *
 from django.views.static import serve
 from django.conf import settings
+from . import views
 
 
 
