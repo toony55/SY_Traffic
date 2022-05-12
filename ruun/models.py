@@ -36,7 +36,7 @@ class Car(models.Model):
    enginedisplacement= models.CharField(max_length=30, default="")
    driver = models.ForeignKey(Driver,on_delete=models.CASCADE)
    violnum = models.CharField(max_length=30, default="")
-   user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+
 
 
 
@@ -53,8 +53,8 @@ class License(models.Model):
    fd = models.DateField(help_text="finished Date", default="")
    city= models.CharField(max_length=30, default="")
    typeoflicense= models.CharField(max_length=30, default="")
-   driver = models.ForeignKey(Driver,on_delete=models.CASCADE)
    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+
 
 
 
@@ -63,9 +63,9 @@ class Violations(models.Model):
    typeofv = models.CharField(max_length=50,help_text="Type Of Violations.",default="")
    datev = models.DateField(verbose_name="Violation date", default="")
    fee = models.DecimalField(max_digits=10,decimal_places=2, default="")
-   plate = models.ForeignKey(Car,on_delete=models.CASCADE)
+   plate = models.ForeignKey(Car,on_delete=models.CASCADE,null=True)
    vionum = models.CharField(max_length=30, default="")
-   user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+
 
 
 
@@ -77,6 +77,13 @@ class Insurance(models.Model):
    dateofexpired = models.DateField(verbose_name="Experation date", default="")
    renewalfee = models.DecimalField(max_digits=10,decimal_places=2, default=0.0)
    plate = models.ForeignKey(Car,on_delete=models.CASCADE)
+
+
+
+class mmm(models.Model):
+   cc = models.CharField(max_length=50,help_text="Type Of cc.", default="")
+   nn = models.CharField(help_text='Number Of nn', default='',max_length=30)
    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+
 
 

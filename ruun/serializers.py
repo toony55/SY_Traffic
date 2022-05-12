@@ -1,6 +1,6 @@
 
 
-from .models import Driver,Car,License,Insurance,Violations
+from .models import Driver,Car,License,Insurance,Violations,mmm
 from rest_framework import serializers
 
 class CarSerializer(serializers.ModelSerializer):
@@ -11,31 +11,23 @@ class CarSerializer(serializers.ModelSerializer):
        fields = ['plate', 'brand', 'modeel', 'weight','cs','cd','fueltype','fueltankcapacity','pyy','rd','en','cn',
                 'color','transmissiontype','nog','maxspeed','enginedisplacement','violnum','driver']
 
-class ViolationsSerializer(serializers.HyperlinkedModelSerializer):
+class ViolationsSerializer(serializers.ModelSerializer):
 
     class Meta:
        model=Violations
-       fields=['typeofv','datev','fee','vionum','plate']
+       fields='__all__'
 
 
 
 
-
-
-
-
-
-
-
-class LicenseSerializer(serializers.HyperlinkedModelSerializer):
-
+class LicenseSerializer(serializers.ModelSerializer):
     class Meta:
        model=License
-       fields = ['namee','Bpay','nationalitty','nationalnuum','bloadtype','licensenum','red','fd','city','typeoflicense','driver']
+       fields ="__all__"
 
 
 
-class InsuranceSerializer(serializers.HyperlinkedModelSerializer):
+class InsuranceSerializer(serializers.ModelSerializer):
 
 
     class Meta:
@@ -44,19 +36,26 @@ class InsuranceSerializer(serializers.HyperlinkedModelSerializer):
 
 
 
-class ViolationsSerializer(serializers.HyperlinkedModelSerializer):
+class ViolationsSerializer(serializers.ModelSerializer):
 
     
     class Meta:
        model=Violations
        fields=['typeofv','datev','fee','vionum','plate']
 
+class mmmSerializer(serializers.ModelSerializer):
 
+    
+    class Meta:
+       model=mmm
+       fields='__all__'
 
-class DriverSerializer(serializers.HyperlinkedModelSerializer):
+class DriverSerializer(serializers.ModelSerializer):
     depth=1
     
     class Meta:
      model = Driver
      fields = ['name', 'code','baalance', 'bd','sex','nationality','nationalnum','carnum','photo']
+
+
 

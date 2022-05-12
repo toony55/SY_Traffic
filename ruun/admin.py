@@ -1,5 +1,5 @@
 from django.contrib import admin
-from ruun.models import Driver,Car,License,Insurance,Violations
+from ruun.models import Driver,Car,License,Insurance,Violations,mmm
 
 
 
@@ -24,9 +24,15 @@ class LicenseAdmin(admin.ModelAdmin):
 class ViolationsAdmin(admin.ModelAdmin):
     list_display=('typeofv','fee')
 
+
+class mmmAdmin(admin.ModelAdmin):
+    list_display=('cc','nn')
+   
+
 # Register your models here.
 admin.site.register(Driver,DriverAdmin)
 admin.site.register(Car,CarAdmin)
+admin.site.register(mmm,mmmAdmin)
 admin.site.register(License,LicenseAdmin)
 admin.site.register(Insurance,InsuranceAdmin)
 admin.site.register(Violations,ViolationsAdmin)
