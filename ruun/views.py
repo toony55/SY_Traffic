@@ -3,10 +3,12 @@ from rest_framework import viewsets
 from django.http import HttpResponse,JsonResponse
 from .serializers import CarSerializer,DriverSerializer,LicenseSerializer,InsuranceSerializer,ViolationsSerializer
 from .models import Driver,Car,License,Insurance,Violations
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Driver,Car,License,Insurance,Violations
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import generics, permissions
 
 
 
@@ -28,7 +30,9 @@ class LicenseViewSet(viewsets.ModelViewSet):
 
 class InsuranceViewSet(viewsets.ModelViewSet):
     queryset = Insurance.objects.all()
+    #permission_classes = [permissions.IsAuthenticated]
     serializer_class = InsuranceSerializer
+
 
 
 class ViolationseViewSet(viewsets.ModelViewSet):

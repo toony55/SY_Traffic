@@ -53,6 +53,9 @@ class License(models.Model):
    fd = models.DateField(help_text="finished Date", default="")
    city= models.CharField(max_length=30, default="")
    typeoflicense= models.CharField(max_length=30, default="")
+   photo=models.URLField(max_length = 200,default="")
+
+   driver = models.ForeignKey(Driver,on_delete=models.CASCADE,null=True)
 
 
 

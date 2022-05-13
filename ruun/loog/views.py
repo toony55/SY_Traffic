@@ -55,54 +55,30 @@ def getDri(request):
 @permission_classes([IsAuthenticated,IsOwnerOrReadOnly])
 def getins(request):
     user=request.user
-    ins=user.insurance_set.all()
-    serializer=InsuranceSerializer(ins,many=True)
-    return Response(serializer.data) 
+    driver=Driver.objects.get(user=user)
+    cars=Car.objects.filter(driver=driver.id)
+    serlist=[]
+    for car in cars:
+      ins = Insurance.objects.filter(plate=car.id)
+      serializer=InsuranceSerializer(ins,many=True)
+      serlist.append(serializer.data)
+    return Response(serlist) 
 
-
-#red this issssss Liiiiiiiicense APi
-
-class LicenseRetrieveAPIView(generics.RetrieveAPIView):
-    serializer_class = LicenseSerializer
-    queryset = License.objects.all()
-    permission_classes = [permissions.IsAuthenticated]
-    lookup_field = "id"
-    
-    def retrieve(self, request, id):
-        license = self.get_queryset().filter(id=id)
-        serializer = self.serializer_class(license)
-        return Response(serializer.data)
-    
-
-
-
-
-
-
-
-
-
-
-    """
-    #red this issssss Caaaaaaaarrrrr APi
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def getCar(request):
-    user=request.user
-    cr=user.car_set.all()
-    serializer=CarSerializer(cr,many=True)
-    return Response(serializer.data)
 
 #red this issssss Vioooooolations APi
-
 @api_view(['GET'])
 @permission_classes([IsAuthenticated,IsOwnerOrReadOnly])
-def getVio(request,pk):
+def getvio(request):
     user=request.user
-    vio=Violations.objects.get(id=pk)
-    serializer=ViolationsSerializer(vio,many=False)
-    return Response(serializer.data)
-
+    driver=Driver.objects.get(user=user)
+    cars=Car.objects.filter(driver=driver.id)
+    serlist=[]
+    for car in cars:
+      vio= Violations.objects.filter(plate=car.id)
+      serializer=ViolationsSerializer(vio,many=True)
+      serlist.append(serializer.data)
+    return Response(serlist) 
+      
 #red this issssss Liiiiiiiicense APi
 
 @api_view(['GET'])
@@ -110,18 +86,29 @@ def getVio(request,pk):
 def getlic(request):
     user=request.user
     driver=Driver.objects.get(user=user)
-    lic=driver.License_set.all()
+    lic = License.objects.filter(driver=driver.id)
     serializer=LicenseSerializer(lic,many=True)
+    return Response(serializer.data)
+
+
+
+    
+#red this issssss Caaaaaaaarrrrr APi
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated,IsOwnerOrReadOnly])
+def getCar(request):
+    user=request.user
+    driver=Driver.objects.get(user=user)
+    cars=Car.objects.filter(driver=driver.id)
+    serializer=CarSerializer(cars,many=True)
     return Response(serializer.data) 
 
 
-#red this issssss teeeeeeeeest APi
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def getM(request,pk):
-    user=request.user
-    dri=user.mmm_set.get(id=pk)
-    serializer=mmmSerializer(dri,many=False)
-    return Response(serializer.data)
 
-    """
+
+
+
+
+
+    
