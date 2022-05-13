@@ -53,7 +53,7 @@ class License(models.Model):
    fd = models.DateField(help_text="finished Date", default="")
    city= models.CharField(max_length=30, default="")
    typeoflicense= models.CharField(max_length=30, default="")
-   user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+
 
 
 

@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from ruun.serializers import CarSerializer,DriverSerializer,LicenseSerializer,InsuranceSerializer,ViolationsSerializer,mmmSerializer
 from ruun.models import Driver,Car,License,Insurance,Violations,mmm
 from rest_framework import generics, permissions
+from .permissions import IsOwnerOrReadOnly
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -47,10 +48,55 @@ def getDri(request):
     serializer=DriverSerializer(dri,many=True)
     return Response(serializer.data)
 
+
+#red this issssss Innnnnnnsurance APi
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated,IsOwnerOrReadOnly])
+def getins(request):
+    user=request.user
+    ins=user.insurance_set.all()
+    serializer=InsuranceSerializer(ins,many=True)
+    return Response(serializer.data) 
+
+
+#red this issssss Liiiiiiiicense APi
+
+class LicenseRetrieveAPIView(generics.RetrieveAPIView):
+    serializer_class = LicenseSerializer
+    queryset = License.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
+    lookup_field = "id"
+    
+    def retrieve(self, request, id):
+        license = self.get_queryset().filter(id=id)
+        serializer = self.serializer_class(license)
+        return Response(serializer.data)
+    
+
+
+
+
+
+
+
+
+
+
+    """
+    #red this issssss Caaaaaaaarrrrr APi
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getCar(request):
+    user=request.user
+    cr=user.car_set.all()
+    serializer=CarSerializer(cr,many=True)
+    return Response(serializer.data)
+
 #red this issssss Vioooooolations APi
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated,IsOwnerOrReadOnly])
 def getVio(request,pk):
     user=request.user
     vio=Violations.objects.get(id=pk)
@@ -60,7 +106,7 @@ def getVio(request,pk):
 #red this issssss Liiiiiiiicense APi
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated,IsOwnerOrReadOnly])
 def getlic(request):
     user=request.user
     driver=Driver.objects.get(user=user)
@@ -78,27 +124,4 @@ def getM(request,pk):
     serializer=mmmSerializer(dri,many=False)
     return Response(serializer.data)
 
-#red this issssss Innnnnnnsurance APi
-
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def getins(request):
-    user=request.user
-    ins=user.Insurance_set.get()
-    serializer=LicenseSerializer(ins,many=True)
-    return Response(serializer.data) 
-
-
-#red this issssss Liiiiiiiicense APi
-
-class LicenseRetrieveAPIView(generics.RetrieveAPIView):
-    serializer_class = LicenseSerializer
-    queryset = License.objects.all()
-    permission_classes = [permissions.IsAuthenticated]
-    lookup_field = "id"
-    
-    def retrieve(self, request, id):
-        license = self.get_queryset().filter(id=id)
-        serializer = self.serializer_class(license)
-        return Response(serializer.data)
-    
+    """
