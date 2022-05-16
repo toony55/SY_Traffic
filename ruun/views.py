@@ -9,6 +9,7 @@ from rest_framework import status
 from .models import Driver,Car,License,Insurance,Violations
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics, permissions
+from rest_framework.response import Response
 
 
 
@@ -45,7 +46,11 @@ class DriverViewSet(viewsets.ModelViewSet):
     serializer_class = DriverSerializer
     http_method_names = ['get','post','retrieve','put','patch']
 
-"""class UserLoginApiView(ObtainAuthToken):
-    renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES"""
 
-         
+
+class Pay(generics.RetrieveAPIView):
+    def get(self, request, *args, **kwargs):
+       driver=Driver.objects.get(id=request.query_params["driver"])
+       violation =Violations.objects.get(id=request.query_params["violation"])
+       result = driver.balance - violation.fee
+       return Response(result)

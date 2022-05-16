@@ -11,6 +11,7 @@ urlpatterns = [
     path('',views.getRoutes ),
     path('driver/',views.getDri),
     path('violation/',views.getvio),
+    path('viol/',views.getvioo),
     path('license/',views.getlic),
     path('cars/',views.getCar),
     path('inss/',views.getins),

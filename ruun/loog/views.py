@@ -110,5 +110,18 @@ def getCar(request):
 
 
 
-
+#red this issssss Vioooooolations APi
+@api_view(['GET'])
+@permission_classes([IsAuthenticated,IsOwnerOrReadOnly])
+def getvioo(request):
+    user=request.user
+    driver=Driver.objects.get(user=user)
+    cars=Car.objects.filter(driver=driver.id)
+    serlist=[]
+    for car in cars:
+      vio= Violations.objects.filter(plate=car.id)
+      serializer=ViolationsSerializer(vio,many=True)
+      serlist.append(serializer.data)
+    
+    return Response(serlist[0][0]) 
     
