@@ -12,7 +12,7 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register(r'ca',CarViewSet)
-router.register(r'inc',InsuranceViewSet)
+router.register(r'ins',InsuranceViewSet)
 router.register(r'lic',LicenseViewSet)
 router.register(r'vio',ViolationseViewSet)
 router.register(r'dri',DriverViewSet)
@@ -21,7 +21,6 @@ router.register(r'dri',DriverViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
-    path('pay',views.Pay.as_view()),
     re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 ]

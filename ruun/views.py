@@ -13,6 +13,7 @@ from rest_framework.response import Response
 
 
 
+
 from rest_framework.authentication import  TokenAuthentication
 from rest_framework.authtoken.views import  ObtainAuthToken
 from rest_framework.authtoken.serializers import AuthTokenSerializer
@@ -39,6 +40,7 @@ class InsuranceViewSet(viewsets.ModelViewSet):
 class ViolationseViewSet(viewsets.ModelViewSet):
     queryset = Violations.objects.all()
     serializer_class = ViolationsSerializer
+
 
 
 class DriverViewSet(viewsets.ModelViewSet):

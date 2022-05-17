@@ -41,7 +41,7 @@ class ViolationsSerializer(serializers.ModelSerializer):
     
     class Meta:
        model=Violations
-       fields=['typeofv','datev','fee','vionum','plate']
+       fields=['typeofv','datev','fee','vionum','plate','IsPaid']
 
 class mmmSerializer(serializers.ModelSerializer):
 

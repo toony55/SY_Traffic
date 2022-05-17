@@ -68,6 +68,7 @@ class Violations(models.Model):
    fee = models.DecimalField(max_digits=10,decimal_places=2, default="")
    plate = models.ForeignKey(Car,on_delete=models.CASCADE,null=True)
    vionum = models.CharField(max_length=30, default="")
+   IsPaid=models.BooleanField(default=False)
 
 
 
@@ -80,7 +81,7 @@ class Insurance(models.Model):
    dateofexpired = models.DateField(verbose_name="Experation date", default="")
    renewalfee = models.DecimalField(max_digits=10,decimal_places=2, default=0.0)
    plate = models.ForeignKey(Car,on_delete=models.CASCADE)
-
+   IsPaid=models.BooleanField(default=False)
 
 
 class mmm(models.Model):
