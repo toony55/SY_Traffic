@@ -15,6 +15,9 @@ class Driver(models.Model):
    photo=models.URLField(max_length = 200,default="")
    user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 
+   def __str__(self):
+        return self.name
+
 class Car(models.Model):
    """The Cars Info."""
    plate = models.CharField(max_length=30,unique=True)
@@ -37,6 +40,9 @@ class Car(models.Model):
    driver = models.ForeignKey(Driver,on_delete=models.CASCADE)
    violnum = models.CharField(max_length=30, default="")
 
+   def __str__(self):
+      return self.modeel
+
 
 
 
@@ -57,6 +63,9 @@ class License(models.Model):
 
    driver = models.ForeignKey(Driver,on_delete=models.CASCADE,null=True)
 
+   def __str__(self):
+      return self.namee
+
 
 
 
@@ -70,6 +79,9 @@ class Violations(models.Model):
    vionum = models.CharField(max_length=30, default="")
    IsPaid=models.BooleanField(default=False)
 
+   def __str__(self):
+        return self.typeofv
+
 
 
 
@@ -82,6 +94,9 @@ class Insurance(models.Model):
    renewalfee = models.DecimalField(max_digits=10,decimal_places=2, default=0.0)
    plate = models.ForeignKey(Car,on_delete=models.CASCADE)
    IsPaid=models.BooleanField(default=False)
+   
+   def __str__(self):
+        return self.typeofi
 
 
 class mmm(models.Model):

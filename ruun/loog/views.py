@@ -1,3 +1,4 @@
+from itertools import count
 from pickle import FALSE
 from django.http import JsonResponse
 from rest_framework.decorators import api_view,permission_classes
@@ -61,7 +62,7 @@ def getins(request):
     cars=Car.objects.filter(driver=driver.id)
     serlist=[]
     for car in cars:
-      ins = Insurance.objects.filter(plate=car.id)
+      ins = Insurance.objects.filter(plate=car.id,IsPaid=False)
       serializer=InsuranceSerializer(ins,many=True)
       serlist.append(serializer.data)
     return Response(serlist) 
@@ -104,7 +105,7 @@ def getvio(request):
     cars=Car.objects.filter(driver=driver)
     serlist=[]
     for car in cars:
-      vio= Violations.objects.filter(plate=car.id)
+      vio= Violations.objects.filter(plate=car.id,IsPaid=False)
       serializer=ViolationsSerializer(vio,many=True)
       serlist.append(serializer.data)
     return Response(serlist) 
@@ -115,13 +116,12 @@ def getvio(request):
 #red this issssss the Pay APi
 @api_view(['POST'])
 @permission_classes([IsAuthenticated&IsDriver])
-def getOneVio(request,id):
-   vio=Violations.objects.get(id=id)
+def getOneVio(request,vionum):
+   vio=Violations.objects.get(vionum=vionum)
    driver=Driver.objects.get(id=vio.plate.driver.id)
    if (vio.IsPaid==False):
       if driver.baalance >= vio.fee:
           driver.baalance=driver.baalance - vio.fee
-          vio.fee=vio.fee-vio.fee
           vio.IsPaid=True
           driver.save()
           vio.save()
@@ -139,13 +139,12 @@ def getOneVio(request,id):
 #red this issssss the Renew APi
 @api_view(['POST'])
 @permission_classes([IsAuthenticated&IsDriver])
-def getRenew(request,id):
-   ins=Insurance.objects.get(id=id)
+def getRenew(request,noi):
+   ins=Insurance.objects.get(noi=noi)
    driver=Driver.objects.get(id=ins.plate.driver.id)
    if (ins.IsPaid==False):
       if driver.baalance >= ins.renewalfee:
           driver.baalance=driver.baalance - ins.renewalfee
-          ins.renewalfee=ins.renewalfee-ins.renewalfee
           ins.IsPaid=True
           driver.save()
           ins.save()
