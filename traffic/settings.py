@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework.authtoken',
     'rest_framework_simplejwt.token_blacklist',
+    'whitenoise.runserver_nostatic',
 ]
 
 REST_FRAMEWORK = {
